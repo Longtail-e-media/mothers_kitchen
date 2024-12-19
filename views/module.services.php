@@ -5,39 +5,52 @@
 $rescont = $ressercont = '';
 $i = 0;
 $j = 0;
-$subpkgRec = Services::getservice_list(4);
-// var_dump($subpkgRec); die();
+$subpkgRec = Services::getservice_list();
+// pr($subpkgRec,1);
+
 if (!empty($subpkgRec)) {
 
-    foreach ($subpkgRec as $k => $v) {
-        $imglink = '';
-        if ($v->image != "a:0:{}") {
-            $imageList = unserialize($v->image);
-            $file_path = SITE_ROOT . 'images/services/' . $imageList[0];
-            if (file_exists($file_path)) {
-                $imglink = IMAGE_PATH . 'services/' . $imageList[0];
-            }
+    foreach($subpkgRec as $subRow){
+        $iconLink = $imgLink = '';
+
+        $file_path_icon = SITE_ROOT .'images/services/icon/'. $subRow->icon_image;
+        if(file_exists($file_path_icon)){
+            $iconLink = IMAGE_PATH . 'services/icon/'. $subRow->icon_image;
+        }else{
+            $iconLink = BASE_URL . 'template/web/assets/images/naan.svg';
         }
-        $actv = ($i == 0) ? 'active' : '';
-        $rescont .= '<li class="' . $actv . '">
-                                            <a href="#coffe-shop' . $v->id . '" data-toggle="tab">
-                                                <img src="' . $imglink . '">
-                                                <h4>' . $v->title . '</h4>
-                                            </a>
-                                        </li>';
-        $i++;
+
+        $unseriallizedImage = unserialize($subRow->image)[0];
+        $file_path = SITE_ROOT .'images/services/'. $unseriallizedImage;
+        if(file_exists($file_path)){
+            $imgLink = IMAGE_PATH .'services/'. $unseriallizedImage;
+        }else{
+            $imgLink = BASE_URL . 'template/web/assets/images/parotha1.png';
+        }
+
+
+        $rescont.='
+            <li class="promo-item">
+                  <div class="promo-card">
+                    <div class="card-icon">
+                      <img src="'. $iconLink .'" alt="icon" class="service-icon"/>
+                    </div>
+
+                    <h3 class="h3 card-title">'. $subRow->title .'</h3>
+    
+                    <p class="card-text">
+                      '. preg_replace('/<\/?p>/','',$subRow->content) .'
+                    </p>
+    
+                    <img src="'. $imgLink .'" width="300" height="300" loading="lazy" alt="Maxican Pizza" class="w-100 card-banner">
+    
+                  </div>
+                </li>
+        ';
+
     }
 
-    foreach ($subpkgRec as $k => $v) {
-        $content = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($v->content));
-        $actv1 = ($j == 0) ? 'active' : '';
-        $ressercont .= '<div role="tabpanel" class="tab-pane fade in ' . $actv1 . '" id="coffe-shop' . $v->id . '">
-                     
-                                <p>' . substr(strip_tags($content[0]), 0, 300) . '
-                                <br><a href="' . BASE_URL . 'service/' . $v->slug . '" title="">Read More</a></p>
-                            </div>';
-        $j++;
-    }
+
 }
 
 $jVars['module:home-service-list'] = $rescont;

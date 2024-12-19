@@ -189,6 +189,49 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                 </div>
 
                 <div class="form-row">
+                <div class="form-label col-md-2">
+                    <label for="">
+                        Icon Image :
+                    </label>
+                </div>
+
+                <?php if (!empty($advInfo->icon_image)): ?>
+                    <div class="col-md-2" id="removeSavedimg11">
+                        <div class="infobox info-bg">
+                            <div class="button-group" data-toggle="buttons">
+                            <span class="float-left">
+                                <?php
+                                if (file_exists(SITE_ROOT . "images/services/icon/" . $advInfo->icon_image)):
+                                    $filesize = filesize(SITE_ROOT . "images/services/icon/" . $advInfo->icon_image);
+                                    echo 'Size : ' . getFileFormattedSize($filesize);
+                                endif;
+                                ?>
+                            </span>
+                                <a class="btn small float-right" href="javascript:void(0);"
+                                   onclick="deleteSavedServicesimage(11);">
+                                    <i class="glyph-icon icon-trash-o"></i>
+                                </a>
+                            </div>
+                            <img src="<?php echo IMAGE_PATH . 'services/icon/thumbnails/' . $advInfo->icon_image; ?>"
+                                 style="width:100%"/>
+                            <input type="hidden" name="imageArrayname11"
+                                   value="<?php echo $advInfo->icon_image; ?>"/>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <div class="form-input col-md-10 uploader11 <?php echo !empty($advInfo->icon_image) ? "hide" : ""; ?>">
+                    <input type="file" name="icon_image" id="icon_image" class="transparent no-shadow">
+                    <!-- <label>
+                        <small>Image Dimensions (<?php echo Module::get_properties($moduleId, 'cimgwidth'); ?> px
+                            X <?php echo Module::get_properties($moduleId, 'cimgheight'); ?> px)
+                        </small>
+                    </label> -->
+                </div>
+                <!-- Upload user image preview -->
+                <div id="preview_Image11"></div>
+            </div>
+
+                <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Icon :
@@ -293,6 +336,48 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                     var filename = data;
                     $.post('<?php echo BASE_URL;?>apanel/services/uploaded_image.php', {imagefile: filename}, function (msg) {
                         $('#preview_Image').append(msg).show();
+                    });
+
+                },
+                'onDialogOpen': function (event, ID, fileObj) {
+                },
+                'onUploadError': function (file, errorCode, errorMsg, errorString) {
+                    alert(errorMsg);
+                },
+                'onUploadComplete': function (file) {
+                    //alert('The file ' + file.name + ' was successfully uploaded');
+                }
+            });
+
+
+            $('#icon_image').uploadify({
+                'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
+                'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+                'formData': {
+                    PROJECT: '<?php echo SITE_FOLDER;?>',
+                    targetFolder: 'images/services/icon/',
+                    thumb_width: 200,
+                    thumb_height: 200
+                },
+                'method': 'post',
+                'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+                'auto': true,
+                'multi': true,
+                'hideButton': false,
+                'buttonText': 'Upload Image',
+                'width': 125,
+                'height': 21,
+                'removeCompleted': true,
+                'progressData': 'speed',
+                'uploadLimit': 100,
+                'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
+                'buttonClass': 'button formButtons',
+                /* 'checkExisting' : '/uploadify/check-exists.php',*/
+                'onUploadSuccess': function (file, data, response) {
+                    $('#uploadedImageName').val('1');
+                    var filename = data;
+                    $.post('<?php echo BASE_URL;?>apanel/services/uploaded_image11.php', {imagefile: filename}, function (msg) {
+                        $('#preview_Image11').append(msg).show();
                     });
 
                 },

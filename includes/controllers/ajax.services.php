@@ -20,12 +20,13 @@
 			$record->sub_title 			= $_REQUEST['sub_title'];
 			$record->image			= serialize(array_values(array_filter($_REQUEST['imageArrayname'])));
 			$record->icon		= $_REQUEST['icon'];			
+			$record->icon_image		= $_REQUEST['imageArrayname11'];			
 			$record->content		= $_REQUEST['content'];			
 			$record->status			= $_REQUEST['status'];
 			
 			$record->sortorder		= Services::find_maximum();
 			$record->added_date 	= registered();
-
+			
 			$checkDupliName=Services::checkDupliName($record->title);			
 			if($checkDupliName):
 				echo json_encode(array("action"=>"warning","message"=>"Services Title Already Exists."));		
@@ -39,41 +40,42 @@
 			
 			$db->begin();
 			if($record->save()): $db->commit();
-			   $message  = sprintf($GLOBALS['basic']['addedSuccess_'], "Services '".$record->title."'");
+			$message  = sprintf($GLOBALS['basic']['addedSuccess_'], "Services '".$record->title."'");
 			echo json_encode(array("action"=>"success","message"=>$message));
-				log_action("Services [".$record->title."]".$GLOBALS['basic']['addedSuccess'],1,3);
-			else: $db->rollback();
-				echo json_encode(array("action"=>"error","message"=>$GLOBALS['basic']['unableToSave']));
+			log_action("Services [".$record->title."]".$GLOBALS['basic']['addedSuccess'],1,3);
+		else: $db->rollback();
+		echo json_encode(array("action"=>"error","message"=>$GLOBALS['basic']['unableToSave']));
 			endif;
-		break;
+			break;
 			
-		case "edit":
-			$record = Services::find_by_id($_REQUEST['idValue']);
-			
-			if($record->title!=$_REQUEST['title']){
-				$checkDupliName=Services::checkDupliName($_REQUEST['title']);
-				if($checkDupliName):
-					echo json_encode(array("action"=>"warning","message"=>"Services title is already exist."));		
-					exit;		
-				endif;
-			}
-
-			$record->slug 			= create_slug($_REQUEST['title']);
-			$record->title 			= $_REQUEST['title'];
-			$record->sub_title 			= $_REQUEST['sub_title'];
-			$record->content		= $_REQUEST['content'];	
-			$record->icon		= $_REQUEST['icon'];		
-			$record->status			= $_REQUEST['status'];							
-			$record->image		= serialize(array_values(array_filter($_REQUEST['imageArrayname'])));					
-			
-
-			$db->begin();
-			if($record->save()): $db->commit();
-			   $message  = sprintf($GLOBALS['basic']['changesSaved_'], "Services '".$record->title."'");
-			   echo json_encode(array("action"=>"success","message"=>$message));
-			   log_action("Services [".$record->title."] Edit Successfully",1,4);
+			case "edit":
+				$record = Services::find_by_id($_REQUEST['idValue']);
+				
+				if($record->title!=$_REQUEST['title']){
+					$checkDupliName=Services::checkDupliName($_REQUEST['title']);
+					if($checkDupliName):
+						echo json_encode(array("action"=>"warning","message"=>"Services title is already exist."));		
+						exit;		
+					endif;
+				}
+				
+				$record->slug 			= create_slug($_REQUEST['title']);
+				$record->title 			= $_REQUEST['title'];
+				$record->sub_title 			= $_REQUEST['sub_title'];
+				$record->content		= $_REQUEST['content'];	
+				$record->icon		= $_REQUEST['icon'];		
+				$record->status			= $_REQUEST['status'];							
+				$record->image		= serialize(array_values(array_filter($_REQUEST['imageArrayname'])));					
+				$record->icon_image		= $_REQUEST['imageArrayname11'];			
+				
+				
+				$db->begin();
+				if($record->save()): $db->commit();
+				$message  = sprintf($GLOBALS['basic']['changesSaved_'], "Services '".$record->title."'");
+				echo json_encode(array("action"=>"success","message"=>$message));
+				log_action("Services [".$record->title."] Edit Successfully",1,4);
 			else: $db->rollback(); echo json_encode(array("action"=>"notice","message"=>$GLOBALS['basic']['noChanges']));
-			endif;
+		endif;
 		break;
 			
 		case "delete":

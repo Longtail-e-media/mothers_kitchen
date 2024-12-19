@@ -28,15 +28,15 @@ for (let i = 0; i < navbarLinks.length; i++) {
  * header sticky & back to top
  */
 
-const header = document.querySelector("[data-header]");
+// const header1 = document.querySelector("[data-header]");
 const backTopBtn = document.querySelector("[data-back-top-btn]");
 
 window.addEventListener("scroll", function () {
   if (window.scrollY >= 100) {
-    header.classList.add("active");
+    // header1.classList.add("active");
     backTopBtn.classList.add("active");
   } else {
-    header.classList.remove("active");
+    // header1.classList.remove("active");
     backTopBtn.classList.remove("active");
   }
 });

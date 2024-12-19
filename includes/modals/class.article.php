@@ -25,7 +25,7 @@ class Article extends DatabaseObject {
 	
 	public static function checkDupliName($title='') {
 		global $db;
-		$query = $db->query("SELECT title FROM ".self::$table_name." WHERE title='$title' LIMIT 1");
+		$query = $db->query("SELECT title FROM ".self::$table_name." WHERE title=\"$title\" LIMIT 1");
 		$result= $db->num_rows($query);
 		if($result>0) {return true;}
 	}

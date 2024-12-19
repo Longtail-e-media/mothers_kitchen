@@ -459,7 +459,7 @@ function getMenuList($caption="", $link="", $type=0, $class="",$nicon=""){
 	$idLink 	= ($id == '') ? '' : ' id="'.$id.'"';
 	$linkType	= ($type == 0) ? '' : ' target="_blank"';
 	$linkhref	= ($type == 0) ? BASE_URL.$link : $link;
-	return "<a href=\"".$linkhref."\" ".$classLink.$idLink.$linkType.$dropclass." >".$caption.$nicon."</a>";
+	return "<a href=\"".$linkhref."\" ".$classLink." data-nav-link >".$caption.$nicon."</a>";
 }
 function getMenuFootList($caption="", $link="", $type=0, $class="",$nicon=""){
 	/*$classLink 	= ($class == '') ? '' : 'class="show-submenu';*/

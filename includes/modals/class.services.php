@@ -2,7 +2,7 @@
 class Services extends DatabaseObject {
 
 	protected static $table_name = "tbl_services";
-	protected static $db_fields = array('id', 'slug','title', 'sub_title', 'image', 'icon', 'linksrc', 'linktype', 'content', 'status', 'added_date', 'sortorder', 'type', 'meta_title', 'meta_keywords', 'meta_description');
+	protected static $db_fields = array('id', 'slug','title', 'sub_title', 'image', 'icon', 'linksrc', 'linktype', 'content', 'status', 'added_date', 'sortorder', 'type', 'meta_title', 'meta_keywords', 'meta_description','icon_image');
 	
 	public $id;
 	public $slug;
@@ -20,6 +20,7 @@ class Services extends DatabaseObject {
 	public $meta_title;
 	public $meta_keywords;
 	public $meta_description;
+	public $icon_image;
 		
 	//Find all published rows in the current database table.
 	public static function getservice_list($limit='') {
