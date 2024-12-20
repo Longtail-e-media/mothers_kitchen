@@ -2,7 +2,7 @@
 class Subpackage extends DatabaseObject {
 
 	protected static $table_name = "tbl_package_sub";
-	protected static $db_fields = array('id', 'slug', 'title', 'sub_title', 'detail', 'facility_title', 'feature', 'image', 'header_image', 'image2', 'image3', 'image4', 'content', 'number_room', 'extra_bed', 'currency', 'discount', 'people_qnty', 'onep_price', 'twop_price', 'threep_price', 'oneb_price', 'twob_price', 'threeb_price','short_title', 'time', 'location', 'serve', 'meta_title', 'meta_keywords', 'meta_description', 'status', 'sortorder', 'added_date','modified_date', 'type', 'theatre_style', 'class_room_style', 'shape', 'round_table', 'clusture', 'cocktail','seats', 'below_content','seminar','meeting','events','conference','catering','celebration','organic_food','occupancy','view','size','service','live_music','bed','room_size','room_service','airport_pickup','private_balcony','checkinout', 'rojai_room_id');
+	protected static $db_fields = array('id', 'slug', 'title', 'sub_title', 'detail', 'facility_title', 'feature', 'image', 'header_image', 'image2', 'image3', 'image4', 'content', 'number_room', 'extra_bed', 'currency', 'discount', 'people_qnty', 'onep_price', 'twop_price', 'threep_price', 'oneb_price', 'twob_price', 'threeb_price','short_title', 'time', 'location', 'serve', 'meta_title', 'meta_keywords', 'meta_description', 'status', 'sortorder', 'added_date','modified_date', 'type', 'theatre_style', 'class_room_style', 'shape', 'round_table', 'clusture', 'cocktail','seats', 'below_content','seminar','meeting','events','conference','catering','celebration','organic_food','occupancy','view','size','service','live_music','bed','room_size','room_service','airport_pickup','private_balcony','checkinout');
 	
 	public $id;
 	public $slug;
@@ -69,7 +69,6 @@ class Subpackage extends DatabaseObject {
 	public $airport_pickup;
 	public $private_balcony;
 	public $checkinout;
-	public $rojai_room_id;
 
 	//Get Facility Ttle
 	public static function getFacility() { 

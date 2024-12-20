@@ -240,7 +240,7 @@
 			$record->time 	= !empty($_REQUEST['time'])?$_REQUEST['time']:'';
 			$record->location 	= !empty($_REQUEST['location'])?$_REQUEST['location']:'';
 			$record->serve 	= !empty($_REQUEST['serve'])?$_REQUEST['serve']:'';
-			$record->rojai_room_id 	= !empty($_REQUEST['rojai_room_id'])?$_REQUEST['rojai_room_id']:'';
+			// $record->rojai_room_id 	= !empty($_REQUEST['rojai_room_id'])?$_REQUEST['rojai_room_id']:'';
 			//$record->extra_bed 		= !empty($_REQUEST['extra_bed'])?$_REQUEST['extra_bed']:'';
 			$record->meta_title		= $_REQUEST['meta_title'];
 			$record->meta_keywords		= $_REQUEST['meta_keywords'];

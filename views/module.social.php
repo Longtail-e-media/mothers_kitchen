@@ -2,34 +2,75 @@
 /*
 * Top Social Links
 */
-$socialRec = SocialNetworking::getSocialNetwork();
+$socialRec = SocialNetworking::getSocialNetworkByType(1);
+$otaRec = SocialNetworking::getSocialNetworkByType(2);
+
 $siteRegulars = Config::find_by_id(1);
 $resocl = '';
 $disicon='';
 
+// pr($socialRec,1);
+foreach($socialRec as $social){
+    if(!empty($social->icon)){
+        $resocl .= ' 
+            <li>
+                <a href="'. $social->linksrc .'" class="social-link">
+                    <i class="'. $social->icon .'"></i>
+                </a>
+            </li>
+        ';
+    }else if(!empty($social->image)){
+        $imgLink = '';
+        $file_path = SITE_ROOT . 'images/social/'.$social->image;
+        if(file_exists($file_path)){
+            $imgLink = IMAGE_PATH . 'social/' . $social->image;
+        }else{
+            $imgLink = BASE_URL . 'template/web/assets/images/whatsapp.png';
+        }
 
-if (!empty($socialRec)) {
-    foreach ($socialRec as $socialRow) {
-        $icon= $socialRow->image;
-        
-if(!empty($icon)){
-    $disicon='<a href="' . $socialRow->linksrc . '" target="_blank"><img src="'.IMAGE_PATH.'social/' . $socialRow->image . '"/></a>';
-}
-else{
-    $disicon='<a href="' . $socialRow->linksrc . '" target="_blank"><i class="' . $socialRow->icon . '"></i></a>';
-}
-        
         $resocl .= '
-        <li>
-        '.$disicon.'
-         </li>
+            <li>
+                <a href="'. $social->linksrc .'" class="social-link">
+                    <img src="'. $imgLink .'" alt="'. $social->title .'" />
+                </a>
+            </li>
         ';
     }
 }
 
 $jVars['module:socilaLinkbtm'] = $resocl;
 
+/* ota */
+$otas = '';
+foreach($otaRec as $ota){
+    if(!empty($ota->icon)){
+        $otas .= '
+            <div class="ota-logo"><i class="'. $ota->icon .'" alt=""></i></div>
+        ';
+    }else if(!empty($ota->image)){
+        $imageLink = '';
+        $file_path = SITE_ROOT . 'images/social/' . $ota->image;
+        if(file_exists($file_path)){
+            $imageLink = IMAGE_PATH . 'social/'. $ota->image;
+        }else{
+            $imageLink = BASE_URL .'template/web/assets/images/pathao.jpg';
+        }
+        $otas .= '
+            <div class="ota-logo"><a href="'. $ota->linksrc .'"><img src="'. $imageLink .'" alt="'. $ota->title .'"></a></div>
+        ';
+    }
+}
+$reOta = '
+    <section class="ota-section">
+      <div>
+        <div class="clip-one"></div>
+        ' . $otas . '
+        <div class="clip-two"></div>
+      </div>
+    </section> 
+';
 
+$jVars['module:home-ota'] = $reOta;
 /*
 * Home social link
 */
@@ -43,6 +84,7 @@ if (!empty($socialRec)) {
 $jVars['module:socilaLinktop'] = $ressl;
 
 $otaRec = ota::getotaNetwork();
+// pr($otaRec,1);
 $ota = '';
 if (!empty($otaRec)) {
     foreach ($otaRec as $otaRow) {

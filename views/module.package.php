@@ -1561,4 +1561,88 @@ $jVars['module:whats-nearby'] = $whats_nearby;
                         
 
 
+$homePacks = '';
+if (defined('HOME_PAGE')) {
+    $pkgRec = Package::getPackage();
+    
+    if (!empty($pkgRec)) {
+        foreach($pkgRec as $pkgRow){
+            if($pkgRow->id == 15){
+                $subRec = Subpackage::getPackage_limit(15);
+                // pr($subRec);
+                $pkgs = '';
+                foreach($subRec as $subRow){
+                    $imgLink = '';
+                    $file_path = SITE_ROOT . 'images/subpackage/image/' . $subRow->image2;
+                    if(file_exists($file_path)){
+                        $imgLink = IMAGE_PATH . 'subpackage/image/' . $subRow->image2;
+                    }else{
+                        $imgLink = BASE_URL . 'template/web/assets/images/pak.png';
+                    }
 
+                    $pkgs .= '
+                        <li>
+                            <div class="food-menu-card">
+        
+                                <div class="card-banner">
+                                    <img src="'. $imgLink .'" width="300" height="300" loading="lazy"
+                                        alt="Fried Chicken Unlimited" class="w-100">
+            
+                                    <div class="badge">'. $subRow->title .'</div>
+            
+                                    <button class="btn food-menu-btn" onclick="document.getElementById(\'orderplace\').scrollIntoView({ behavior: \'smooth\' });">Order Now</button>
+                    
+                                </div>
+        
+                                <div class="wrapper">
+                                    <p class="category">Contains</p>
+                                </div>
+        
+                                '. $subRow->content .'
+        
+        
+                                <div class="price-wrapper">
+        
+                                <p class="price-text">Price:</p>
+        
+                                <data class="price">'. $subRow->currency .' '. $subRow->onep_price .' </data>
+        
+        
+                                </div>
+        
+                            </div>
+                        </li>
+                    ';
+                }
+        
+                $homePacks = '
+                    <section class="section food-menu" id="pack">
+                        <div class="container">
+        
+                        <p class="section-subtitle">Day Office Lunch Box</p>
+        
+                        <h2 class="h2 section-title">
+                            '. $pkgRow->title .' <span class="span">'. $pkgRow->sub_title .'</span>
+                        </h2>
+        
+                        <p class="section-text">
+                            '. strip_tags($pkgRow->content) .'
+                        </p>
+        
+                        <ul class="food-menu-list">
+        
+                            '. $pkgs .'
+        
+                        
+                        </ul>
+        
+        
+                        </div>
+                    </section>
+                ';
+            }
+        }
+
+    }
+}
+$jVars['module:meal-pack'] = $homePacks;

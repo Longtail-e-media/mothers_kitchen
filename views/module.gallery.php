@@ -1,41 +1,60 @@
 <?php
 $reslgall = '';
 
-$gallRec = Gallery::getParentgallery(2);
+$gallRec = Gallery::getParentgallery(1);
+// pr($gallRec);
 if (!empty($gallRec)) {
-foreach ($gallRec as $gallRow) {
-$childRec = GalleryImage::getGalleryImages($gallRow->id);
-if (!empty($childRec)) {
-$reslgall .= '';
-foreach ($childRec as $childRow) {
-$file_path = SITE_ROOT . 'images/gallery/galleryimages/' . $childRow->image;
-if (file_exists($file_path) and !empty($childRow->image)) {
-    $reslgall .= '
-                <div class="gallery-image">
-                    <img src="' . IMAGE_PATH . 'gallery/galleryimages/' . $childRow->image . '" alt="' . $childRow->title . '">
-                </div>
-                    ';
-}
-}
-$reslgall .= '';
-}
-}
+    foreach ($gallRec as $gallRow) {
+        if($gallRow->id == 11){
+            $childRec = GalleryImage::getGalleryImages($gallRow->id);
+            if (!empty($childRec)) {
+                $reslgall .= '';
+                foreach ($childRec as $childRow) {
+                    $file_path = SITE_ROOT . 'images/gallery/galleryimages/' . $childRow->image;
+                    if (file_exists($file_path) and !empty($childRow->image)) {
+                        $reslgall .= '
+                            <div class="slide" id="slide1">
+                                <img src="'. IMAGE_PATH .'gallery/galleryimages/'. $childRow->image .'" alt="Menu Item 1">
+                            </div>
+                        ';
+                    }
+                }
+                $reslgall .= '';
+            }
+        }
+    }
 }
 
 $res_gallery = '
-                <!-- Gallery starts -->
-                <section class="content gallery gallery1">
-                    <div class="container">
-                        <div class="section-title title-white">
-                            <h2>Beautiful View of <span>Shangrila Blu</span></h2>
-                            <p class="mar-bottom-30">Few collection of our pictures. We are quiet sure that you will find it more beautiful once you physically visit us.</p>
+    <section style="margin: auto;" id="menu">
+        <div class="container" style="text-align: center;">
+
+          
+            <div style="display: block; text-align: center;">
+                <div class="about-content" style="text-align: center;">
+                    <h2 class="h2 section-title">
+                    Our Regular<br>
+                    <span class="span">Menu</span>
+                    </h2>
+
+                    <div class="slider" style="margin-left: auto; margin-right: auto; text-align: center;">
+                        <div class="slides">
+                            '. $reslgall .'
                         </div>
+                        <button class="nav-button prev" onclick="prevSlide()">&#10094;</button>
+                        <button class="nav-button next" onclick="nextSlide()">&#10095;</button>
                     </div>
-                    <div class="gallery-main gallery-slider">
-                        '. $reslgall .'
+                     <br>
+                    
+                    <div style="text-align: center;">
+                        <!-- <button class="btn btn-hover" style="margin-left: auto; margin-right: auto; text-align: center;">Menu</button> -->
                     </div>
-                </section>
-                <!-- Gallery Ends -->';
+                </div>
+            </div>
+
+        </div>
+    </section>
+';
 
 $jVars['module:galleryHome'] = $res_gallery;
 

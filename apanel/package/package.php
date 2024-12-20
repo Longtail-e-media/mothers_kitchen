@@ -167,7 +167,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     </div>
                 </div>
 
-                <div class="form-row add-image">
+                <div class="form-row add-image" style="display:none;">
                     <div class="form-label col-md-2">
                         <label for="">
                             Banner Image :
@@ -238,13 +238,13 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </label>
                         <textarea name="content" id="content"
                                   class="large-textarea validate[required]"><?php echo !empty($packageInfo->content) ? $packageInfo->content : ""; ?></textarea>
-                        <!-- <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore" href="javascript:void(0);">
+                        <a class="btn medium bg-orange mrg5T hide" title="Read More" id="readMore" href="javascript:void(0);">
                             <span class="button-content">Read More</span>
-                        </a> -->
+                        </a>
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row" style="display:none;">
                     <div class="form-label col-md-2">
                         <label for="">
                             Make as Room :

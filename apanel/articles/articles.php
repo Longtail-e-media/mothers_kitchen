@@ -282,11 +282,11 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                 <div class="form-row">
                     <div class="form-checkbox-radio col-md-9">
                         <input type="radio" class="custom-radio" name="homepage" id="homepage1"
-                               value="1" <?php echo !empty($homepage) ? $homepage : ""; ?>>
+                               value="1" checked <?php echo !empty($homepage) ? $homepage : ""; ?>>
                         <label for="">Homepage</label>
-                        <input type="radio" class="custom-radio" name="homepage" id="homepage0"
+                        <!-- <input type="radio" class="custom-radio" name="homepage" id="homepage0"
                                value="0" <?php echo !empty($nothomepage) ? $nothomepage : "checked"; ?>>
-                        <label for="">Not at Homepage</label>
+                        <label for="">Not at Homepage</label> -->
                     </div>
                 </div>
                 <div class="form-row">

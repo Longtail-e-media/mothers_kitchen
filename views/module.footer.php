@@ -1,12 +1,13 @@
 <?php
 $siteRegulars = Config::find_by_id(1);
+// pr($siteRegulars);
 $lastElement='';
 $phonelinked='';
 $whatsapp='';
 $tellinked = '';
-    $telno = explode("/", $siteRegulars->contact_info);
+    $telno = explode(",", $siteRegulars->contact_info);
     $lastElement = array_shift($telno);
-    $tellinked .= '<a href="tel:' . $lastElement . '" target="_blank">' . $lastElement . '</a>/';
+    $tellinked .= '<a href="tel:' . $lastElement . '" target="_blank">' . $lastElement . ' ,</a>';
     foreach ($telno as $tel) {
         
         $tellinked .= '<a href="tel:+977-' . $tel . '" target="_blank">' . $tel . '</a>';
@@ -40,65 +41,63 @@ $footer = '
 
             <ul class="social-list">
 
-                <li>
-                <a href="https://www.facebook.com/profile.php?id=61565717052376" class="social-link">
-                    <i class="fa-brands fa-facebook"></i>
-                </a>
+                <!--<li>
+                    <a href="https://www.facebook.com/profile.php?id=61565717052376" class="social-link">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
                 </li>
 
                 <li>
-                <a href="https://wa.me/9851401214" class="social-link">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>
+                    <a href="https://wa.me/9851401214" class="social-link">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
                 </li>
 
                 <li>
-                <a href="#" class="social-link">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
                 </li>
 
                 <li>
-                <a href="#" class="social-link">
-                    <i class="fa-brands fa-pinterest-p"></i>
-                </a>
-                </li>
-
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-pinterest-p"></i>
+                    </a>
+                </li>-->
+                '. $jVars['module:socilaLinkbtm'] .'
             </ul>
 
             </div>
 
             <ul class="footer-list">
 
-            <li>
-                <p class="footer-list-title">Contact Info</p>
-            </li>
+                <li>
+                    <p class="footer-list-title">Contact Info</p>
+                </li>
 
-            <li>
-                <p class="footer-list-item">+977 9851401214, +977 9849367927</p>
-            </li>
+                <li>
+                    <p class="footer-list-item">'. $tellinked .'</p>
+                </li>
 
-            <li>
-                <p class="footer-list-item">motherskitchen001@gmail.com</p>
-            </li>
+                <li>
+                    <p class="footer-list-item"><a href="mailto:'. $siteRegulars->email_address .'">'. $siteRegulars->email_address .'</a></p>
+                </li>
 
-            <li>
-                <address class="footer-list-item">Arun Thapa Chowk, Jhamsikhel</address>
-            </li>
+                <li>
+                    <address class="footer-list-item">'. $siteRegulars->fiscal_address .'</address>
+                </li>
 
-            </ul>
+                </ul>
 
-            <ul class="footer-list">
+                <ul class="footer-list">
 
-            <li>
-                <p class="footer-list-title">Opening Hours</p>
-            </li>
+                <li>
+                    <p class="footer-list-title">Opening Hours</p>
+                </li>
 
-            <li>
-                <p class="footer-list-item">Everyday: 08:00 a.m -10:00 p.m</p>
-            </li>
-
-            
+                <li>
+                    <p class="footer-list-item">Everyday: 08:00 a.m -10:00 p.m</p>
+                </li>
 
             </ul>
 

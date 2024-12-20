@@ -271,7 +271,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                 </div>
                 <?php if ($pkg->type == 1) { ?>
 
-                    <div class="form-row">
+                    <!-- <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">
                                 Room Id (Rojai) :
@@ -280,9 +280,9 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <div class="form-input col-md-6">
                             <input placeholder="Rojai Room Id" class="col-md-3 validate[length[0,200]]" type="text"
                                    name="rojai_room_id" id="rojai_room_id"
-                                   value="<?php echo !empty($subpackageInfo->rojai_room_id) ? $subpackageInfo->rojai_room_id : ""; ?>">
+                                   value="<?php //echo !empty($subpackageInfo->rojai_room_id) ? $subpackageInfo->rojai_room_id : ""; ?>">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">
@@ -972,7 +972,30 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     
 
                 <?php } ?>
+                    
+                <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Currency Type :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-6">
+                            <input placeholder="Currency Type" class="col-md-3 validate[length[0,2]]" type="text"
+                                   name="currency" id="currency"
+                                   value="<?php echo !empty($subpackageInfo->currency) ? $subpackageInfo->currency : ""; ?>">
+                        </div>
+                    </div>
 
+                <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">Price :</label>
+                        </div>
+                        <div class="form-input col-md-6">
+                            <input placeholder="Price" class="col-md-3 validate[length[0,3]]" type="text"
+                                   name="onep_price" id="room_price1"
+                                   value="<?php echo !empty($subpackageInfo->onep_price) ? $subpackageInfo->onep_price : ''; ?>">
+                        </div>
+                    </div>
                 <div class="form-row">
                     <div class="form-label col-md-10">
                         <label for="">
@@ -1072,7 +1095,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
     </div>
     <script>
         var base_url = "<?php echo ASSETS_PATH; ?>";
-        var editor_arr = ["content","below_content"];
+        var editor_arr = ["content"];
         create_editor(base_url, editor_arr);
     </script>
 

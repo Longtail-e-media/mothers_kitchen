@@ -3,7 +3,7 @@
 $moduleTablename = "tbl_slideshow"; // Database table name
 $moduleId = 4;                // module id >>>>> tbl_modules
 $position = array(1 => 'First', 2 => 'Second', 3 => 'Third', 4 => 'Four', 5 => 'Five');
-$type= array(1=>'Image', 2=>'Video');
+$type= array(1=>'Image');
 
 if (isset($_GET['page']) && $_GET['page'] == "slideshow" && isset($_GET['mode']) && $_GET['mode'] == "list"):
     clearImages($moduleTablename, "slideshow");
@@ -287,7 +287,7 @@ if (isset($_GET['page']) && $_GET['page'] == "slideshow" && isset($_GET['mode'])
                 
                 <?php }?>
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Link Type :
@@ -301,9 +301,9 @@ if (isset($_GET['page']) && $_GET['page'] == "slideshow" && isset($_GET['mode'])
                                onClick="linkTypeSelect(1);" <?php echo !empty($external) ? $external : ""; ?>>
                         <label for="">External Link</label>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Link :
@@ -325,9 +325,9 @@ if (isset($_GET['page']) && $_GET['page'] == "slideshow" && isset($_GET['mode'])
                             </select>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Short Content :
@@ -337,7 +337,7 @@ if (isset($_GET['page']) && $_GET['page'] == "slideshow" && isset($_GET['mode'])
                         <textarea name="content" id="content"
                                   class="large-textarea"><?php echo !empty($advInfo->content) ? $advInfo->content : ""; ?></textarea>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-row">
                     <div class="form-label col-md-2">

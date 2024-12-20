@@ -21,6 +21,13 @@ class SocialNetworking extends DatabaseObject {
 		return self::find_by_sql($sql);
 	}
 
+
+	public static function getSocialNetworkByType($type = 2){
+		global $db;
+		$sql= "SELECT * FROM ".self::$table_name." WHERE status=1 AND type=". $type ." ORDER BY sortorder ASC";
+		return self::find_by_sql($sql);
+	}
+
 	//FIND THE HIGHEST MAX NUMBER.
 	public static function find_maximum($field="sortorder"){
 		global $db;

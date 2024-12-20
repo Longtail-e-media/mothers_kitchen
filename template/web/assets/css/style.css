@@ -1850,7 +1850,10 @@ body {
 .ota-logo{
   max-width: 200px;
 }
-.ota-logo > img{
+.ota-logo > a{
+  width: 100%;
+}
+.ota-logo > a > img{
   width: 100%;
 }
 .clip-one{

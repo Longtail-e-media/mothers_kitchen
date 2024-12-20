@@ -3,7 +3,7 @@ $moduleTablename  = "tbl_menu"; // Database table name
 $moduleId 		  = 2;				// module id >>>>> tbl_modules
 $moduleFoldername = "";		// Image folder name
 $menuLevel = Module::get_properties($moduleId,'level');
-$position = array(1=>'Top Menu', 2=>'Footer Menu');
+$position = array(1=>'Top Menu');
 
 if(isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $_GET['mode']=="list"):	
 ?>
@@ -154,8 +154,8 @@ endif;
                 <div class="form-checkbox-radio col-md-9">
                     <input id="" class="custom-radio" type="radio" name="linktype" value="0" onClick="linkTypeSelect(0);" <?php echo !empty($internal)?$internal:"checked";?>>
                     <label for="">Internal Link</label>
-                    <input id="" class="custom-radio" type="radio" name="linktype" value="1" onClick="linkTypeSelect(1);" <?php echo !empty($external)?$external:"";?>>
-                    <label for="">External Link</label>
+                    <!-- <input id="" class="custom-radio" type="radio" name="linktype" value="1" onClick="linkTypeSelect(1);" <?php echo !empty($external)?$external:"";?>>
+                    <label for="">External Link</label> -->
                 </div>
             </div>
             <div class="form-row">
@@ -168,7 +168,7 @@ endif;
                 	<div class="col-md-4" style="padding-left:0px !important;">
                     	<input  placeholder="Menu Link" class="validate[required,length[0,50]]" type="text" name="linksrc" id="linksrc" value="<?php echo !empty($menu->linksrc)?$menu->linksrc:"";?>">                    
                     </div>
-                	<div class="col-md-6" style="padding-left:0px !important;">
+                	<div class="col-md-6" style="padding-left:0px !important;display:none;">
 						<select data-placeholder="Select Link Page" class="col-md-4 chosen-select" id="linkPage">
                             <option value=""></option>
                             <?php 
